@@ -1,0 +1,84 @@
+<?xml version ='1.0' encoding ='UTF-8' ?> 
+<definitions name='Coupons' 
+  targetNamespace='http://localhost/coupons' 
+  xmlns:tns=' http://localhost/coupons ' 
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/' 
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' 
+  xmlns='http://schemas.xmlsoap.org/wsdl/'> 
+  
+<message name='getCouponsRequest'> 
+</message> 
+<message name='getCouponsResponse'> 
+  <part name='Result' type='xsd:string'/> 
+</message> 
+
+<message name='setCouponsRequest'> 
+  <part name='couponId' type='xsd:string'/> 
+</message> 
+<message name='setCouponsResponse'> 
+  <part name='Result' type='xsd:string'/> 
+</message> 
+
+<portType name='CouponsPortType'> 
+  <operation name='getCoupons'> 
+    <input message='tns:getCouponsRequest'/> 
+    <output message='tns:getCouponsResponse'/> 
+  </operation> 
+</portType> 
+
+<portType name='setCouponsPortType'> 
+  <operation name='setClippedCoupon'> 
+    <input message='tns:setCouponsRequest'/> 
+    <output message='tns:setCouponsRequest'/> 
+  </operation> 
+</portType> 
+
+<binding name='CouponsBinding' type='tns:CouponsPortType'> 
+  <soap:binding style='rpc' 
+    transport='http://schemas.xmlsoap.org/soap/http'
+  /> 
+  <operation name='getCoupons'> 
+    <soap:operation soapAction='urn:localhost-coupons#getCoupons'/> 
+    <input> 
+      <soap:body use='encoded' namespace='urn:localhost-coupons' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </input> 
+    <output> 
+      <soap:body use='encoded' namespace=
+   'urn:localhost-coupons' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </output> 
+  </operation> 
+</binding>
+
+<binding name='setCouponsBinding' type='tns:setCouponsPortType'> 
+  <soap:binding style='rpc' 
+    transport='http://schemas.xmlsoap.org/soap/http'
+  /> 
+  <operation name='setClippedCoupon'> 
+    <soap:operation soapAction='urn:localhost-coupons#setClippedCoupon'/> 
+    <input> 
+      <soap:body use='encoded' namespace='urn:localhost-coupons' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </input> 
+    <output> 
+      <soap:body use='encoded' namespace=
+   'urn:localhost-coupons' 
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/> 
+    </output> 
+  </operation> 
+</binding>
+
+<service name='CouponsService'> 
+	<port name='CouponsPort' binding=
+		'CouponsBinding'> 
+		<soap:address location='http://localhost:6543/service.php'/> 
+	</port> 
+	<port name='setCouponsPort' binding=
+		'setCouponsBinding'> 
+		<soap:address location='http://localhost:6543/service.php'/> 
+	</port>
+</service>
+</definitions>
